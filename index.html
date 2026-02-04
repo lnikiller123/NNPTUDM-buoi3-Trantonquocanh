@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Platzi Product Dashboard</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+  <h2 class="mb-3">📦 Product Dashboard</h2>
+
+  <!-- Toolbar -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <input id="searchInput" class="form-control" placeholder="Search by title..." />
+    </div>
+
+    <div class="col-md-2">
+      <select id="pageSize" class="form-select">
+        <option value="5">5 / page</option>
+        <option value="10" selected>10 / page</option>
+        <option value="20">20 / page</option>
+      </select>
+    </div>
+
+    <div class="col-md-6 text-end">
+      <button class="btn btn-success" onclick="openCreateModal()">➕ Create</button>
+      <button class="btn btn-secondary" onclick="exportCSV()">⬇ Export CSV</button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <table class="table table-bordered table-hover bg-white">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>
+          Title
+          <button class="btn btn-sm btn-light" onclick="sortBy('title')">↕</button>
+        </th>
+        <th>
+          Price
+          <button class="btn btn-sm btn-light" onclick="sortBy('price')">↕</button>
+        </th>
+        <th>Category</th>
+        <th>Images</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <!-- Pagination -->
+  <nav>
+    <ul class="pagination" id="pagination"></ul>
+  </nav>
+</div>
+
+<!-- View/Edit Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Product Detail</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="detailId">
+        <div class="mb-2">
+          <label>Title</label>
+          <input id="detailTitle" class="form-control">
+        </div>
+        <div class="mb-2">
+          <label>Price</label>
+          <input id="detailPrice" type="number" class="form-control">
+        </div>
+        <div class="mb-2">
+          <label>Description</label>
+          <textarea id="detailDescription" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="updateProduct()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Create Product</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input id="createTitle" class="form-control mb-2" placeholder="Title">
+        <input id="createPrice" type="number" class="form-control mb-2" placeholder="Price">
+        <textarea id="createDescription" class="form-control mb-2" placeholder="Description"></textarea>
+        <input id="createImage" class="form-control mb-2" placeholder="Image URL">
+        <input id="createCategory" type="number" class="form-control" placeholder="Category ID">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" onclick="createProduct()">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
